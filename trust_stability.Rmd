@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
+Do social experiences shape individuals' levels of social trust? Existing literature on social trust suggests ... 
+
 This paper attempts to reconcile two findings in the literature on general social trust. On one hand, a number of both observational and experimental studies show that changes in social structure can produce meaningful changes in social trust [@glanville2013; @paxton2015]. This approach suggests that genealized trust is malleable. At the same time, studies of the behavior of attitudes over time suggest that people rarely make lasting changes in attitudes and behaviors, even while they make lasting changes to social structures, with social trust being particularly resilient to durable change [@kiley2020; @vaisey2021]. This finding aligns with previous work suggesting that general social trust is a disposition that is shaped early in life and cannot be affected by changes in social structure throughout life.
 
 To reconcile these findings, I argue that short-term changes in social structure do often lead to real changes in attitudes, but that these effects disappear over a relatively short time frame, accounting for their disappearance in longitudinal observational data. There are two potential explanations for this reversion. The first explanation posits that changes in social structure are also temporary, and that people revert to a baseline on both dimensions. This would mean that the connection between social structure and attitudes is quite robust. The second explanation suggests that changes in social structures produce changes in attitudes, but while these social structural changes persist, attitudes revert to their baseline. 
@@ -19,19 +21,12 @@ I test these two models in the domain of social trust. To do so I first replicat
 
 The results support a model in which changes in social structures do produce changes in social trust in the short term, but these attitude changes disappear after a short time lag. In this sense, social trust is malleable, in that exogenous shocks do alter people's trust, but it is also rigid, as people return to their baseline over time. 
 
-## Malleable Trust
+## Views of Trust
 
-One view on social trust argues that experiences influence a person's level of general trust as individuals generalize from their specific experiences [@coleman; @glanville...]. 
-
-Glanville, .. and Paxton, using two waves of the general social survey, show that changes in informal social ties -- frequency of socializing with others -- produces changes in social trust. 
-
-Similarly, a number of experimental studies show that social interactions influence generalized trust. 
+Two distinct theories dominate the literature on generalized trust. A social learning perspective suggests that people extrapolate from their local experiences in producing an estimate of general trust. In this framework, people ... []. 
 
 
-
-## Stable Dispositions
-
-Other researchers have argued that rather than developing through interactions over time,  generalized trust is a disposition shaped by early life experiences [@gidden1991; @uslaner2002]. Uslaner distinguishes between experienced-based trust and general trust. 
+A second model suggests that general trust is shaped early in life. Other researchers have argued that rather than developing through interactions over time,  generalized trust is a disposition shaped by early life experiences [@gidden1991; @uslaner2002]. Uslaner distinguishes between experienced-based trust and general trust. 
 
 People's level of generalized trust is highly stable over time, suggesting that it is relatively impervious to experiences [@uslaner]. 
 
@@ -49,64 +44,38 @@ How do we explain the fact that researchers occasionally observe changes in one'
 
 The key finding in that paper is that between the 2006 and 2008 waves in the General Social Survey, changes in informal social ties, as measured by changes in the frequency of socializing with friends, relatives, and neighbors (though not frequency of socializing in bars), leads to changes in generalized trust, as measured by a composite scale of three questions about social trust.
 
-Below I replicate that finding using comparable methods.[^methods] While I find slighlty different coefficient estimate, attitbutable to changes in the panel and slightly methodological differences, these are concentrated among non-significant coefficients. The main finding of the paper -- that a one-unit change in socializing produces a .015 (.013 in the original) change in generalized social trust -- is replicated here. As is the significant positive effect of gaining an educational degree. Change in health is not comparable in this model.
+Model 1 in  Table XX replicates that finding using comparable methods.[^methods] While I find slighlty different coefficient estimate, attitbutable to changes in the panel and slightly methodological differences, these are concentrated among non-significant coefficients. The main finding of the paper -- that a one-unit change in socializing produces a .015 (.013 in the original) change in generalized social trust -- is replicated here. As is the significant positive effect of gaining an educational degree. Change in health is not comparable in this model.
 
-[^methods]: There are two differences between my approach and the original. First, the GSS panels were updated over time, so the average values of responses and proportions are slightly different in the two analyses. Second, rather than employ the Full Information Maximum Likelihood approach, I use multiple imputation. The two approachs produce comparable results.
-
-```{r}
-
-```
-
-This is the equivalent
-
-$$ y_{3i} = \beta_0 + \beta X_{2i} + $$
-
-This model is the same as asking whether changes between waves 1 and 2 produce any lasting effect on wave 3. 
-
-Table ... presents those results. 
+[^methods]: There are two differences between my approach and the original. First, data in the GSS panels were updated over time, so the average values of responses and proportions are slightly different in the two analyses. Second, rather than employ the Full Information Maximum Likelihood approach, I use multiple imputation to fill in missing data. The two approaches produce comparable results.
 
 ```{r}
 
 ```
 
-In looking at whether changes between waves 1 and 2 produce any notable effect on wave 3 values (as would be expected if changes persist), the model finds no significant coefficients.
+Model 2 in Table ... presents the results of first-difference approach with waves 1 and 3. If durable changes in informal social interaction produce durable changes in generalized trust, we should observe a similar effect as that observed in the difference between waves 1 and 2. There is none. 
 
+Model 3 in table XXX tests whether this is due to both informal social ties and generalized trust reverting to their baseline. To do so, I use a fixed-effects approach. If change in social ties produces a change in social trust, but people tend to revert on both in a short time frame, then the fixed-effects model will continue to find a signficiant effect. If people's informal socializing continues at a similar rate, but their trust reverts to where it was at time 1 (or if significant changes in informal ties are not correlated with changes in social trust), the fixed-effects model will not produce a statistically significant effect, as changes in social ties are no longer a good predictor of changes in informal trust. 
 
-To test whether this is due to both informal social ties and generalized trust reverting, I use a fixed-effects approach. If change in social ties produces a change in social trust, but people tend to revert on both in a short time frame, then the fixed-effects model will continue to find a signficiant effect. If people's informal socializing continues at a similar rate, but their trust reverts to where it was at time 1, the fixed-effects model will not produce a significant effect, as changes in social ties are no longer a good predictor of changes in informal trust. 
+In the fixed-effects model, changes in social ties have no appreciable effect on changes in generalized trust, suggesting that the "effect" of social tie change that is observed in the first pair of waves is fleeting. 
+
+To further this analysis, I replicate the same three models with the other two panels. With the exception of the first wave from the 2006-10 panel, no pair of waves or three-wave fixed effect model produces a statistically significant effect of change in social ties on change in generalized trust. 
+
 
 ```{r}
-
+g6_12_fd
+g6_13_fd
+g6_fe
 ```
-
-
-In the fixed-effects model, changes in social ties have no appreciable effect on changes in generalized trust, suggesting that the "effect" of social tie change is fleeting. 
-
-### Other Panels
-
-I further explore the robustness of the relationship between informal social tie change and generalized trust ...   Figure ... plots coefficient estimates of the first-differences model replicated for the five other panel-wave pairs available in the GSS.
 
 ```{r}
-bind_rows(g6_results, g6_results_23, g8_results, g8_results_23,
-          g10_results, g10_results_23) %>%
-  filter(term == "deltaties") %>%
-  mutate(waves = ifelse(is.na(waves), "06-1-2", waves)) %>%
-  ggplot(aes(x = waves, y = estimate)) + 
-  geom_hline(yintercept = 0, linetype = 21) + 
-  geom_linerange(aes(ymin = estimate - 1.96 * std.error,
-                     ymax = estimate + 1.96 * std.error)) + 
-  geom_point(shape = 21, fill = "gray") + 
-  coord_flip() + 
-  theme_minimal() + 
-  labs(x = "", y = "Coefficient estimate")
+t.wide2
 ```
-
-
 
 
 
 ## Alternative Explanations
 
-
+How, then, do we reconcile a rather strong finding of change in informal social ties on social trust in the first wave of the panel with the lack of effects in subsequent panels? It is hard to identify anything distinct about the 2006-08 wave that would produce these effects. It is implausible to attribute these differences to power, as all samples are roughly the same size, and all demonstrate comparable levels variance in both trust and social ties.  
 
 There are two potential explanations for why a strong effect is observed in the 2006-08 wave, but not in any of the others, or in the full-panel fixed-effects models. First is that the strong effect of social tie change on change in generalized trust is spurious, due to some unobserved time-variant variable. The obvious culprit is the great recession of 2007-09. However, both generalized social trust and informal social ties *increased* in this window. While it is possible that the recession had these effects, it is somewhat counter-intuitive. 
 

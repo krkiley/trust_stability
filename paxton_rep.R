@@ -110,6 +110,7 @@ t <- g6 %>%
 
 
 
+
 t.wide <- t %>% 
   mutate(divorced = ifelse(divorced_1 == 0 & divorced_3 == 1, 1, 0),
          degree = ifelse(degree_3 > degree_1, 1, 0),
@@ -129,8 +130,19 @@ t.wide2 <- t.wide %>%
          #deltaattend2 = attend_3 - attend_2
          ) %>%
   select(id_1, wtssall, divorced, degree, haschild, unemploy, deltaties, 
-         deltahealth, deltaattend, deltatv, deltatrust) %>%
+         deltahealth, deltaattend, deltatv, deltatrust, dateintv_1, dateintv_2) %>%
   mutate(miss = ifelse(is.na(deltatrust), 1, 0)) 
+
+ggplot(t.wide2 %>% filter(!is.na(deltatrust)), 
+       aes(x = dateintv_1, y = dateintv_2, fill = deltatrust)) + 
+  geom_point(shape = 21) + 
+  scale_fill_viridis_b()
+
+
+ggplot(t.wide2, aes(x = deltaties, y = deltatrust)) + 
+  geom_jitter() +
+  geom_smooth(method = "loess") + 
+  theme_minimal()
 
 mice2 <- mice(t.wide2, m = 30)
 
@@ -138,7 +150,9 @@ fit.all <- with(mice2, lm(deltatrust ~ divorced + degree + haschild + unemploy +
                  deltaties + deltahealth + deltaattend + deltatv,
                  weights = wtssall))
 
-summary(pool(fit.all))
+g6_13_fd <- summary(pool(fit.all))
+g6_12_fd <- g6_23_fd
+g6_23_fd <- summary(pool(fit.all))
 
 df.1 <- complete(mice2, 1)
 
@@ -198,17 +212,19 @@ semPaths(m1, intercepts = FALSE)
 
 
 t.long <- t %>%
+  select(-c(ds, y1, y2, y3, time21, time32)) %>%
   gather(key = "key", value = "value", -c(id_1, wtssall)) %>%
   separate(key, into=c("var", "wave"), sep = "_") %>%
    spread(var, value) %>%
   select(id_1, wtssall, wave, gtrust, divorced, degree, 
          haschild, unemploy, health, attend, tvhours, 
          socindex, socfrend, socommun, socrel, socbar) %>%
-  mutate(miss = ifelse(is.na(gtrust), 1, 0))
+  mutate(miss = ifelse(is.na(gtrust), 1, 0)) %>%
+  select(-c(socfrend, socommun, socrel, socbar))
 
 
 
-mice1 <- mice(t.long, m = 30)
+mice1 <- mice(t.long)
 
 df1 <- complete(mice1, action = 'long', include = TRUE) %>%
   #mutate(gtrust = ifelse(miss == 1, NA, 0)) %>%
@@ -217,9 +233,10 @@ df1 <- complete(mice1, action = 'long', include = TRUE) %>%
                   health, attend, tvhours, socindex), ~ .x - mean(.x, na.rm = TRUE)))
   
 fit <- with(as.mids(df1, where = NULL), lm(gtrust ~ divorced + degree + haschild + unemploy + health + 
-                        attend + tvhours + socindex))
+                        attend + tvhours + socindex,
+                        weights = wtssall))
 
-summary(pool(fit))
+g6_fe <- summary(pool(fit))
 
 df1 %>% purrr::map(mutate(.x, miss = miss + 1))
 
